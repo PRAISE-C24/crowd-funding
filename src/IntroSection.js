@@ -1,8 +1,11 @@
-import { useState } from "react";
 import Button from "./Buttons";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 function Intro({ handleModal }) {
-  const [bookMarked, setBookMarked] = useState(false);
+  //bookmarked state
+  const bookMarked = useStoreState((state) => state.bookMarked);
+  //bookmarked action
+  const setBookMarked = useStoreActions((action) => action.setBookMarked);
 
   let style = {
     backgroundColor: "#eeee",
@@ -10,7 +13,7 @@ function Intro({ handleModal }) {
   };
 
   function handleBookMark() {
-    setBookMarked((prevMarked) => !prevMarked);
+    setBookMarked();
   }
 
   return (

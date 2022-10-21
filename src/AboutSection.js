@@ -1,6 +1,9 @@
 import DetailItem from "./DetailItem";
+import { useStoreState } from "easy-peasy";
 
-function About({ handleModal, data }) {
+function About({ handleModal }) {
+  const data = useStoreState((state) => state.data);
+
   return (
     <article
       id="about-section"
@@ -26,16 +29,7 @@ function About({ handleModal, data }) {
         <ul id="details" className=" m-auto flex flex-col gap-8">
           {data.map((item) => {
             return (
-              <DetailItem
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                text={item.text}
-                pledge={item.pledge}
-                buttonText={item.mainButton}
-                remainder={item.remainder}
-                handleModal={handleModal}
-              />
+              <DetailItem key={item.id} item={item} handleModal={handleModal} />
             );
           })}
         </ul>

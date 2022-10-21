@@ -1,23 +1,30 @@
-import { useState } from "react";
 import ModalItem from "./ModalItem";
+import { useStoreActions, useStoreState } from "easy-peasy";
 
-function ModalList({ data, handleModal, handleChange, newPledge }) {
-  const [isChecked, setIsChecked] = useState(false);
-  const [checkedId, setCheckedId] = useState(0);
+function ModalList({ handleModal, handleChange }) {
+  //data state
+  const data = useStoreState((state) => state.data);
+
+  //isChecked action
+  const setIsChecked = useStoreActions((action) => action.setIsChecked);
+
+  //checked id action
+  const setCheckedId = useStoreActions((action) => action.setCheckedId);
+
+  //checked id state
+  const checkedId = useStoreState((state) => state.checkedId);
 
   function handleCheck(e) {
     const id = e.target.id;
 
-    setIsChecked((prevChecked) => !prevChecked);
+    setIsChecked();
 
-    setCheckedId((prevId) => {
-      if (prevId === Number(id)) {
-        return Number(id);
-      } else {
-        setIsChecked(true);
-        return Number(id);
-      }
-    });
+    if (checkedId === Number(id)) {
+      setCheckedId(Number(id));
+    } else {
+      setIsChecked(true);
+      setCheckedId(Number(id));
+    }
   }
 
   return (
@@ -44,17 +51,9 @@ function ModalList({ data, handleModal, handleChange, newPledge }) {
           return (
             <ModalItem
               key={item.id}
-              id={item.id}
-              title={item.title}
-              text={item.text}
-              pledge={item.pledge}
-              buttonText={item.modalButton}
-              remainder={item.remainder}
+              item={item}
               handleModal={handleModal}
               handleChange={handleChange}
-              newPledge={newPledge}
-              isChecked={isChecked}
-              checkedId={checkedId}
               handleCheck={handleCheck}
             />
           );

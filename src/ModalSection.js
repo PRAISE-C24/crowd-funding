@@ -2,16 +2,15 @@ import ModalList from "./ModalList";
 import Thanks from "./ThankYou";
 import OutOfStock from "./OutOfStock";
 import WrongInput from "./WrongInput";
+import { useStoreState } from "easy-peasy";
 
-function Modal({
-  handleModal,
-  toggleModal,
-  newPledge,
-  handleChange,
-  activeModal,
-  data,
-  currentPledge,
-}) {
+function Modal({ handleModal, handleChange, currentPledge }) {
+  //toggle modal state
+  const toggleModal = useStoreState((state) => state.toggleModal);
+
+  //active modal state
+  const activeModal = useStoreState((state) => state.activeModal);
+
   return (
     <article
       id="Modal-section"
@@ -23,16 +22,11 @@ function Modal({
       {activeModal === "Out of stock" ? (
         <OutOfStock handleModal={handleModal} />
       ) : activeModal === "wrong pledge" ? (
-        <WrongInput handleModal={handleModal} currentPledge={currentPledge} />
+        <WrongInput handleModal={handleModal} />
       ) : activeModal === "Continue" ? (
         <Thanks handleModal={handleModal} />
       ) : (
-        <ModalList
-          handleModal={handleModal}
-          handleChange={handleChange}
-          newPledge={newPledge}
-          data={data}
-        />
+        <ModalList handleModal={handleModal} handleChange={handleChange} />
       )}
     </article>
   );

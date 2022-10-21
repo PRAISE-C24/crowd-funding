@@ -1,13 +1,8 @@
 import Button from "./Buttons";
 
-function DetailItem({
-  title,
-  text,
-  pledge,
-  buttonText,
-  remainder,
-  handleModal,
-}) {
+function DetailItem({ item, handleModal }) {
+  const { title, text, pledge, mainButton, remainder } = item;
+
   return (
     <li
       style={{ display: pledge === "1" && "none" }}
@@ -25,7 +20,7 @@ function DetailItem({
         </p>
 
         <div className="w-[200px]">
-          <Button buttonText={buttonText} handleModal={handleModal} />
+          <Button buttonText={mainButton} handleModal={handleModal} />
         </div>
       </div>
     </li>

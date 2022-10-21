@@ -1,6 +1,8 @@
 import Button from "./Buttons";
+import { useStoreState } from "easy-peasy";
 
-function WrongInput({ handleModal, currentPledge }) {
+function WrongInput({ handleModal }) {
+  const currentPledge = useStoreState((state) => state.currentPledge);
   return (
     <section
       id="WrongPledge-section"
@@ -13,7 +15,7 @@ function WrongInput({ handleModal, currentPledge }) {
           </h2>
         ) : (
           <h2 className="text-xl font-bold p-2 md:text-2xl ">
-            Sorry pledge can not be Empty!
+            Sorry you can not make an Empty pledge!
           </h2>
         )}
 

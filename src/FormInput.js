@@ -1,15 +1,18 @@
 import Button from "./Buttons";
+import { useStoreState } from "easy-peasy";
 
-function Form({
-  id,
-  placeholder,
-  buttonText,
-  isChecked,
-  checkedId,
-  handleModal,
-  handleChange,
-  newPledge,
-}) {
+function Form({ item, handleModal, handleChange }) {
+  const { id, pledge, modalButton } = item;
+
+  //new pledge state
+  const newPledge = useStoreState((state) => state.newPledge);
+
+  //isChecked state
+  const isChecked = useStoreState((state) => state.isChecked);
+
+  //checked id state
+  const checkedId = useStoreState((state) => state.checkedId);
+
   return (
     <section
       style={{ display: isChecked && checkedId === id && "flex" }}
@@ -28,14 +31,14 @@ function Form({
             className="w-[45%] font-bold text-xl border-none  outline-none"
             type="text"
             id={id}
-            placeholder={placeholder}
+            placeholder={pledge}
             value={newPledge}
             onChange={handleChange}
           />
         </div>
 
         <div className="form-content w-[130px] h-[55px]">
-          <Button buttonText={buttonText} handleModal={handleModal} />
+          <Button buttonText={modalButton} handleModal={handleModal} />
         </div>
       </form>
     </section>

@@ -1,17 +1,23 @@
 import { useEffect } from "react";
-import { useState } from "react";
 import ListItem from "./ListItems";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
-function Stat({ currentFund, currentBackers }) {
-  const [fundPercent, setFundPercent] = useState(0);
+function Stat() {
+  //current fund state
+  const currentFund = useStoreState((state) => state.currentFund);
+  //current backers state
+  const currentBackers = useStoreState((state) => state.currentBackers);
+  //funding percent state
+  const fundPercent = useStoreState((state) => state.fundPercent);
 
-  useEffect(() => {
-    function CalcPercent() {
-      let percent = (currentFund * 100) / 100000;
-      setFundPercent(percent);
-    }
-    CalcPercent();
-  }, [currentFund]);
+  const setFundPercent = useStoreActions((action) => action.setFundPercent);
+
+  function CalcPercent() {
+    let percent = (currentFund * 100) / 100000;
+    setFundPercent(percent);
+  }
+  CalcPercent();
+
   return (
     <article
       id="stat-section"

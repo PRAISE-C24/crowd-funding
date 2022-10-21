@@ -1,19 +1,15 @@
 import Form from "./FormInput";
+import { useStoreState } from "easy-peasy";
 
-function ModalItem({
-  id,
-  title,
-  text,
-  pledge,
-  buttonText,
-  remainder,
-  handleModal,
-  handleChange,
-  newPledge,
-  isChecked,
-  checkedId,
-  handleCheck,
-}) {
+function ModalItem({ item, handleModal, handleChange, handleCheck }) {
+  const { id, title, text, pledge, remainder } = item;
+
+  //isChecked state
+  const isChecked = useStoreState((state) => state.isChecked);
+
+  //checked id state
+  const checkedId = useStoreState((state) => state.checkedId);
+
   return (
     <li className="w-[90%] m-auto  border-darkGray   border-2 rounded-lg hover:border-moderateCyan">
       <section className="flex flex-col gap-6 p-4 relative">
@@ -66,16 +62,7 @@ function ModalItem({
 
       {/* form section */}
 
-      <Form
-        buttonText={buttonText}
-        placeholder={pledge}
-        isChecked={isChecked}
-        checkedId={checkedId}
-        id={id}
-        handleModal={handleModal}
-        handleChange={handleChange}
-        newPledge={newPledge}
-      />
+      <Form item={item} handleModal={handleModal} handleChange={handleChange} />
     </li>
   );
 }

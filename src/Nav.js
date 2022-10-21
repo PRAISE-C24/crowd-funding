@@ -1,3 +1,5 @@
+import { useStoreState, useStoreActions } from "easy-peasy";
+
 function DesktopNav() {
   return (
     <nav className="hidden text-white text-xl justify-center items-center gap-6 md:flex z-10">
@@ -14,14 +16,18 @@ function DesktopNav() {
   );
 }
 
-function MobileNav({ handleMenu, toggleMenu }) {
+function MobileNav({ handleMenu }) {
+  //toggle menu state
+  const toggleMenu = useStoreState((state) => state.toggleMenu);
+  //toggle menu action
+  const setToggleMenu = useStoreActions((action) => action.setToggleMenu);
   return (
     <div
       style={{ transform: !toggleMenu && `translateX(${100}%)` }}
       className="fixed top-0 left-0 w-full h-full bg-[#00000067] z-10 transition duration-500"
     >
       <img
-        onClick={handleMenu}
+        onClick={setToggleMenu}
         className="absolute top-10 right-6 w-6"
         src="/images/icon-close-menu.svg"
         alt=""
