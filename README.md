@@ -22,7 +22,7 @@ Users should be able to:
 
 - My Solution URL:https://github.com/PRAISE-C24/crowd-funding
 
-- Live Site URL: https://praise-c24.github.io/crowd-funding
+- Live Site URL: https://glittering-duckanoo-d9579f.netlify.app/
   /
 
 # Built with
